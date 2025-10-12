@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { psychologistService } from '../../services'
-import { AvailabilityDTO, TimeOffDTO } from '../../types/psychologist.types'
+import { AvailabilityDTO, TimeOffDTO, AvailabilityRequest } from '../../types/psychologist.types'
 import { Card, LoadingSpinner, Button, Input, Modal } from '../../components/common'
 
 const AvailabilityPage = () => {
@@ -10,7 +10,7 @@ const AvailabilityPage = () => {
   const [showAvailabilityModal, setShowAvailabilityModal] = useState(false)
   const [showTimeOffModal, setShowTimeOffModal] = useState(false)
 
-  const [newAvailability, setNewAvailability] = useState({
+  const [newAvailability, setNewAvailability] = useState<AvailabilityRequest>({
     dayOfWeek: 'MONDAY',
     startTime: '09:00',
     endTime: '17:00',
