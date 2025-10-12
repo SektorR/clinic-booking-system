@@ -25,7 +25,7 @@ import ProfilePage from './pages/psychologist/ProfilePage'
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <div className="min-h-screen bg-gray-50 flex flex-col">
           <Routes>
             {/* Patient Portal - Public Routes */}
