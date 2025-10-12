@@ -1,0 +1,50 @@
+# Environment files
+.env
+.env.local
+.env.production
+*.env
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/package-lock.json
+
+# Backend
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Docker
+docker/*.env
+
+# Agent reports (optional - comment out if you want to keep them)
+AGENT_*.md
+*_COMPLETION_REPORT.md
+*_COMPLETION_SUMMARY.md
+*_FIX.md
+*_FIX_SUMMARY.md

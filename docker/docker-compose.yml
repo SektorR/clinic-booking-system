@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: groundandgrow-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: groundandgrow
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - groundandgrow-network
+
+  # Backend Spring Boot Application
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: groundandgrow-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      MONGODB_URI: mongodb://mongodb:27017/groundandgrow
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ORIGINS: http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - groundandgrow-network
+
+  # Frontend React Application
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: groundandgrow-frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080/api
+    depends_on:
+      - backend
+    networks:
+      - groundandgrow-network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  groundandgrow-network:
+    driver: bridge

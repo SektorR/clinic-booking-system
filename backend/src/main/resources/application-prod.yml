@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
+logging:
+  level:
+    com.groundandgrow: INFO
+    org.springframework.web: WARN
+    org.springframework.security: WARN
+
+server:
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never
+    include-exception: false
+
+springdoc:
+  swagger-ui:
+    enabled: false

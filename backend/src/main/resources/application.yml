@@ -1,0 +1,99 @@
+spring:
+  application:
+    name: groundandgrow-backend
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/groundandgrow}
+      database: groundandgrow
+
+  security:
+    user:
+      name: ${ADMIN_USERNAME:admin}
+      password: ${ADMIN_PASSWORD:changeme}
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+jwt:
+  secret: ${JWT_SECRET:your-secret-key-change-in-production-must-be-at-least-256-bits}
+  expiration: 86400000 # 24 hours in milliseconds
+
+# Swagger/OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+# Logging
+logging:
+  level:
+    com.groundandgrow: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# CORS Configuration
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+
+# Application specific settings
+app:
+  timezone: Australia/Sydney
+  booking:
+    buffer-minutes: 15
+    cancellation-notice-hours: 24
+    reminder-hours-before: 24
+    guest-booking-enabled: true # Allow booking without account
+  notification:
+    email:
+      enabled: ${EMAIL_ENABLED:true}
+      from: ${EMAIL_FROM:noreply@groundandgrow.com.au}
+      from-name: ${EMAIL_FROM_NAME:Ground & Grow Psychology}
+    sms:
+      enabled: ${SMS_ENABLED:false}
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
+
+# Stripe Configuration
+stripe:
+  api-key: ${STRIPE_API_KEY:sk_test_your_key_here}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET:whsec_your_webhook_secret}
+  currency: AUD
+  success-url: ${FRONTEND_URL:http://localhost:5173}/booking/success
+  cancel-url: ${FRONTEND_URL:http://localhost:5173}/booking/cancel
+
+# SendGrid (alternative to JavaMail)
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:}
+  enabled: ${SENDGRID_ENABLED:false}
+
+# Twilio SMS Configuration
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID:}
+  auth-token: ${TWILIO_AUTH_TOKEN:}
+  phone-number: ${TWILIO_PHONE_NUMBER:}
+  enabled: ${TWILIO_ENABLED:false}
