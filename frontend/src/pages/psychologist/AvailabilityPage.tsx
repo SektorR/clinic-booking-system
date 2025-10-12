@@ -154,7 +154,7 @@ const AvailabilityPage = () => {
             <select
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-300"
               value={newAvailability.dayOfWeek}
-              onChange={(e) => setNewAvailability({ ...newAvailability, dayOfWeek: e.target.value })}
+              onChange={(e) => setNewAvailability({ ...newAvailability, dayOfWeek: e.target.value as AvailabilityRequest['dayOfWeek'] })}
             >
               {['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'].map(day => (
                 <option key={day} value={day}>{day}</option>
