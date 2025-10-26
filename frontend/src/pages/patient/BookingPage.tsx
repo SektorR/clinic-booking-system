@@ -145,8 +145,16 @@ const BookingPage = () => {
       // Save booking details to Redux
       dispatch(setBookingData(formData))
 
-      // Redirect to Stripe checkout
-      window.location.href = response.checkoutUrl
+      // For demo: Navigate internally instead of external Stripe redirect
+      // Extract token from URL if present
+      const url = new URL(response.checkoutUrl, window.location.origin)
+      const token = url.searchParams.get('token')
+
+      if (token) {
+        navigate(`/booking/success?token=${token}`)
+      } else {
+        navigate('/booking/success')
+      }
     } catch (error) {
       console.error('Failed to create booking:', error)
       alert('Failed to create booking. Please try again.')

@@ -7,15 +7,16 @@ import { Card, Button } from '../../components/common'
  */
 const BookingSuccessPage = () => {
   const [searchParams] = useSearchParams()
+  const token = searchParams.get('token')
   const sessionId = searchParams.get('session_id')
   const [confirmationSent, setConfirmationSent] = useState(false)
 
   useEffect(() => {
     // Simulate confirmation email sent
-    if (sessionId) {
+    if (sessionId || token) {
       setTimeout(() => setConfirmationSent(true), 1000)
     }
-  }, [sessionId])
+  }, [sessionId, token])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50/40 via-stone-50/30 to-emerald-50/30 flex items-center justify-center py-12 px-4">
@@ -140,11 +141,28 @@ const BookingSuccessPage = () => {
           </div>
 
           {/* Payment Receipt */}
-          <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-8">
+          <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
             <p className="text-sm text-emerald-900">
               💳 A payment receipt has been emailed to you
             </p>
           </div>
+
+          {/* Booking Management Link - Demo Feature */}
+          {token && (
+            <div className="bg-amber-50 border border-amber-300 rounded-lg p-4 mb-8">
+              <p className="text-sm font-semibold text-amber-900 mb-2">
+                📋 Manage Your Booking (Demo Feature)
+              </p>
+              <p className="text-xs text-amber-800 mb-3">
+                In a real system, this link would be emailed to you. For demo purposes, you can access it here:
+              </p>
+              <Link to={`/booking/manage/${token}`}>
+                <Button size="sm" variant="secondary">
+                  View/Manage Booking
+                </Button>
+              </Link>
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

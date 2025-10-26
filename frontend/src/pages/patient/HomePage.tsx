@@ -123,6 +123,24 @@ export const HomePage: React.FC = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-stone-100/50 via-amber-50/40 to-emerald-50/30 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          {/* Demo Banner */}
+          <div className="mb-8 mx-auto max-w-3xl">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg shadow-lg p-4 border-2 border-blue-400">
+              <div className="flex items-center justify-center gap-3">
+                <svg className="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="text-center">
+                  <p className="font-semibold text-sm md:text-base">
+                    📋 Demo Version - No Backend Required
+                  </p>
+                  <p className="text-xs md:text-sm text-blue-100 mt-1">
+                    All data is stored locally in your browser. Fully functional booking system with mock psychologists and appointments.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 pb-2 text-stone-800 drop-shadow-lg">
               Professional Psychology Services in Australia
